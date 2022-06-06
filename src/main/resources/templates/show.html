@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en"
+        xmlns:th="http://thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+        layout:decorate="layouts/layout"
+        xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>User page</title>
+  </head>
+<body>
+<table class="table">
+  <thead>
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+      <span class="navbar-brand" th:text="${user.email} + ' with roles: ' + ${#strings.arrayJoin(user.roles, ' ')}"></span>
+      <ul class="navbar-nav justify-content-right">
+        <li class="nav-item mr-1">
+          <a class="nav-link" href="/logout">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  </thead>
+  <tbody>
+  <tr class="row">
+    <td class="col-2 bg-white">
+
+      <!--Боковая панель-->
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col bg-white">
+            <ul class="nav nav-pills flex-column">
+              <li class="nav-item">
+                <a href="/user" class="nav-link active">User</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </td>
+    <!--Вкладки-->
+    <td class="col-10 bg-light">
+      <H1>User information-page</H1>
+      <nav>
+        <!-- Таблица пользователя-->
+        <div class="nav nav-tabs" role="tablist">
+        </div>
+      </nav>
+      <div class="tab-content">
+          <div class="pl-3 pt-1 d-flex border-bottom"><h4>About user</h4></div>
+          <div class="bg-white p-3">
+            <table class="table table-striped border-top">
+              <thead>
+              <tr>
+                <th>Id</th>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Age</th>
+                <th>Email</th>
+                <th>Role</th>
+              </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                <td th:text="${user.id}">VALUE</td>
+                <td th:text="${user.name}">VALUE</td>
+                <td th:text="${user.surName}">VALUE</td>
+                <td th:text="${user.age}">VALUE</td>
+                <td th:text="${user.email}">VALUE</td>
+                <td th:text="${#strings.arrayJoin(user.roles, ' ')}">
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        </div>
+      </div>
+    </td>
+  </tr>
+
+  </tbody>
+  </br>
+  </hr>
+</table>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
