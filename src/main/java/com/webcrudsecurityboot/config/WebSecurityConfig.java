@@ -40,8 +40,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .disable()
                 .authorizeRequests()
                 .antMatchers("/", "/login", "/logout").permitAll()
-                .antMatchers("/admin/**").hasAuthority("ADMIN")
-                .antMatchers("/user/**").hasAnyAuthority("USER", "ADMIN")
+//                .antMatchers("/admin/**").hasAuthority("ADMIN")
+//                .antMatchers("/user/**").hasAnyAuthority("USER", "ADMIN")
+                .antMatchers("/api/users/**").hasAuthority("ADMIN")
+                .antMatchers("/api/users/{id}").hasAnyAuthority("USER", "ADMIN")
                 .anyRequest().authenticated();
 
         httpSecurity.formLogin()
@@ -77,4 +79,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public SpringSecurityDialect springSecurityDialect() {
         return new SpringSecurityDialect();
     }
+
+
 }
