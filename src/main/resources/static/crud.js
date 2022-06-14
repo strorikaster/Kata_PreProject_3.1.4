@@ -28,7 +28,7 @@ function addUserForTable(user) {
         '<button onclick="editUserById(' + user.id + ')" class="btn btn-info edit-btn" data-toggle="modal" data-target="#edit"' +
         '>Edit</button></td>' +
         '<td>' +
-        '<button onclick="deleteUserById(' + user.id + ')" class="btn btn-danger" data-toggle="modal" data-target="#delete"' +
+        '<button onclick="deleteUserById(' + user.id + ')" class="btn btn-danger edit-btn" data-toggle="modal" data-target="#delete"' +
         '>Delete</button></td>' +
         '</tr>'
     )
@@ -127,14 +127,14 @@ function editUserById(id) {
 function updateItem() {
     let id = document.getElementById('editId').value;
     let name = document.getElementById('editName').value;
-    let lastName = document.getElementById('editSurname').value;
+    let surName = document.getElementById('editSurName').value;
     let age = document.getElementById('editAge').value;
     let email = document.getElementById('editEmail').value;
     let password = document.getElementById('editPassword').value;
     let roles = getRole(Array.from(document.getElementById('editRole').selectedOptions).map(role => role.value));
 
-    fetch("api/users/" + id, {
-        method: "PATCH",
+    fetch("api/users/" /*+ id*/, {
+        method: "PUT",
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json; charset=UTF-8'

@@ -36,9 +36,9 @@ public class AdminRestController {
 //    }
 
     @GetMapping(value = "/users/{id}")
-    public User getUser(@PathVariable Long id ) {
-        User user = userService.show(id);
-        return user;
+    public User getUser(@PathVariable("id") Long id ) {
+        return userService.show(id);
+        //return user;
     }
 
 //    @PostMapping("/users")
@@ -58,19 +58,19 @@ public class AdminRestController {
     }
 
     @PutMapping("/users")
-    public User updateUser(@RequestBody User user, @RequestParam Long[] rolesId) {
+    public User updateUser(@RequestBody User user) {
         HashSet<Role> roles = new HashSet<>();
-        for(Long roleId : rolesId) {
-            roles.add(roleService.show(roleId));
+        for(Role role : roles) {
+            roles.add(role);
         }
         user.setRoles(roles);
-        userService.save(user);
+        userService.update(user);
         return user;
     }
 
     @DeleteMapping("/users/{id}")
-    public String deleteUser (@PathVariable Long id)  {
+    public void deleteUser (@PathVariable Long id)  {
         userService.delete(id);
-        return "User with id: " + id + " was deleted";
+        //return "User with id: " + id + " was deleted";
     }
 }
