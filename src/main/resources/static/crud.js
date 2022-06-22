@@ -1,23 +1,62 @@
+let mainUsersUrl = "/api/users"
+let result
+let listOfUsers = document.querySelector('#getAllUsers')
+const editButton = document.getElementById('editButton')
+const deleteButton = document.getElementById('deleteButton')
+// document.addEventListener('DOMContentLoaded', function() {
+//     let modalButtons = document.querySelectorAll('js-open-modal'),
+//         overlay = document.querySelector('#overlay-modal'),
+//         closeButtons = document.querySelectorAll('js-modal-close')
+//     modalButtons.forEach(function(item) {
+//         item.addEventListener('click', function(event) {
+//             event.preventDefault()
+//             let modalId = this.getAttribute('data-modal'),
+//                 modalelem = document.querySelector('.modal[data-modal ="'+ modalId +'"]');
+//             modalElem.classList.add('active')
+//             overlay.classList.add('active')
+//         });
+//     })
+// })
 
-// const fetchUsers = async () => {
-//     try {
-//         const res = await fetch('http://localhost:8080/api/users');
-//         if (!res.ok) {
-//             throw new Error(res.status);
-//         }
-//         const data = await res.json();
-//         console.log(data);
-//     } catch (error) {
-//         console.log(error);
-//     }
-// }
+$(async function() {
+    await getAllUsers()
+})
 
-//fetchUsers();
+async function getAllUsers() {
+    fetch(mainUsersUrl)
+        .then(response => response.json())
+        .then((users) => {
+            users.forEach((user) => {
+                result += `
+                       <tr>
+                           <td>${user.id}</td>
+                           <td>${user.name}</td>
+                           <td>${user.surName}</td>
+                           <td>${user.age}</td>
+                           <td>${user.email}</td>
+                           <td>${user.roles.map(role => role.name)}</td>
+                           <td> 
+                               <button type="button"
+                                    id = "editButton"
+                                    class="btn btn-primary btn-sm text-white text-decoration-none text-center btn-info js-open-modal"
+                                    data-toggle="modal"
+                                    data-target="#edit"
+                                    data-userid="${user.id}">Edit
+                               </button>
+                           </td>
+                           <td>
+                               <button type="button"
+                                  id = "deleteButton"
+                                  class="btn btn-primary btn-sm text-white text-decoration-none text-center btn-danger js-open-modal"
+                                  data-toggle="modal"
+                                  data-target="#delete"
+                                  data-userid="${user.id}">Delete
+                               </button>   
+                           </td>
+                       </tr>`
+            })
 
-fetch('http://localhost:8080/api/users')
-    .then(res => res.json())
-    .then(res => {
-        res.data.map(user => {
-            console.log(`${user.id}: ${user.name} ${user.surName}`);
-        });
-    });
+            listOfUsers.innerHTML = result
+        })
+}
+
