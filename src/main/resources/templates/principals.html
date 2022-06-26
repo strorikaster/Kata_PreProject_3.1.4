@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Users</h1>
+<ul id="users"></ul>
+<script>
+    const ul = document.getElementById('users')
+    const url = 'http://localhost:8080/api/users'
+    function createNode(element) {
+        return document.createComment(element)
+    }
+    function append(parent, el) {
+        return parent.appendChild(el)
+    }
+
+    fetch(url)
+        .then((resp) => resp.json())
+        .then(function(data) {
+            let users = data.results;
+            return principals.map(function (user){
+                let li = createNode('li')
+                let span = createNode('span')
+                span.innerHTML = `${user.name.first} ${user.name.last}`;
+                append(li, span);
+                append(ul, li)
+            })
+        })
+    .catch(function(error) {
+    });
+</script>
+</body>
+</html>
