@@ -22,13 +22,14 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     public void save(User user) {
+        System.out.println(user);
         entityManager.persist(user);
-        System.out.println("User saved");
+        System.out.println(user);
     }
 
-    public void update(User updatedUser) {
-        entityManager.merge(updatedUser);
-        System.out.println("Merge is work");
+    public User update(User updatedUser) {
+       return entityManager.merge(updatedUser);
+        //System.out.println("Merge is work");
     }
 
     public void delete(Long id) {
